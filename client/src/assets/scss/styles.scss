@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #fdfdfd;
+}
+
+.text-transparent {
+    color: #0000 !important;
+}
+
+.rounded-0-right {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.rounded-0-left {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background: #343a40;
+    width: 3rem;
+}

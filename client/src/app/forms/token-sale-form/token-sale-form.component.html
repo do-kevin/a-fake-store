@@ -1,0 +1,99 @@
+<form
+    [formGroup]="tokenSaleForm"
+    ngxsForm="sales_detail.tokenSaleForm"
+    (ngSubmit)="onPay($event)"
+>
+    <div class="form-group">
+        <label for="cc-number">Card number</label>
+        <input
+            class="form-control"
+            formControlName="cardNumber"
+            id="cc-number"
+            type="tel"
+            autocomplete="cc-number"
+            ccNumber
+        />
+    </div>
+    <div class="form-group">
+        <label for="cardholderNameInput">Name on card</label>
+        <input
+            type="text"
+            class="form-control"
+            formControlName="cardholderName"
+        />
+    </div>
+    <div class="row">
+        <div class="col d-flex flex-row">
+            <div class="col-6 pl-0">
+                <label for="expirationInput">Expiration date</label>
+                <div class="form-group">
+                    <select
+                        class="form-control"
+                        formControlName="expirationMonth"
+                    >
+                        <option
+                            *ngFor="let month of months"
+                            [ngValue]="month.value"
+                        >
+                            {{ month.text }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6 pr-0">
+                <div class="form-group">
+                    <label class="text-transparent">Year</label>
+                    <select
+                        class="form-control"
+                        formControlName="expirationYear"
+                    >
+                        <option
+                            *ngFor="let year of years"
+                            [ngValue]="year.value"
+                        >
+                            {{ year.text }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                <label for="cc-cvc">Security Code (CVC)</label>
+                <input
+                    type="tel"
+                    class="form-control"
+                    id="cc-cvc"
+                    autocomplete="off"
+                    ccCVC
+                    formControlName="securityCode"
+                />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9">
+            <div class="form-group">
+                <label for="avs-street">Street address</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="avs-street"
+                    formControlName="streetAddress"
+                />
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="creditCardZipCodeInput">Zip code</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="creditCardZipCodeInput"
+                    formControlName="zipCode"
+                />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-dark px-5">Pay Now</button>
+</form>

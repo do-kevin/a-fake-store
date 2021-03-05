@@ -1,50 +1,46 @@
 {
-    "name": "credit-card-payment",
+    "name": "a-fake-store",
     "version": "0.0.0",
+    "description": "",
+    "main": "server/index.ts",
     "scripts": {
-        "ng": "ng",
-        "config": "ts-node ./scripts/setenv.ts",
-        "start": "npm run config -- --environment=dev && ng serve",
-        "build": "npm run config -- --environment=prod && ng build",
-        "test": "ng test",
-        "lint": "ng lint",
-        "e2e": "ng e2e"
+        "start": "node ./build/server/index.js",
+        "dev": "nodemon",
+        "build": "./node_modules/.bin/tsc",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "heroku-postbuild": "rm -rf client && ./node_modules/.bin/tsc"
     },
-    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/do-kevin/a-fake-store.git"
+    },
+    "keywords": [],
+    "author": {
+        "name": "Kevin Do",
+        "email": "do.kevin.vo@gmail.com"
+    },
+    "bugs": {
+        "url": "https://github.com/do-kevin/a-fake-store/issues"
+    },
+    "homepage": "https://github.com/do-kevin/a-fake-store#readme",
     "dependencies": {
-        "@angular/animations": "~11.2.4",
-        "@angular/common": "~11.2.4",
-        "@angular/compiler": "~11.2.4",
-        "@angular/core": "~11.2.4",
-        "@angular/forms": "~11.2.4",
-        "@angular/platform-browser": "~11.2.4",
-        "@angular/platform-browser-dynamic": "~11.2.4",
-        "@angular/router": "~11.2.4",
+        "axios": "^0.21.1",
+        "cors": "^2.8.5",
         "dotenv": "^8.2.0",
-        "rxjs": "~6.6.0",
-        "tslib": "^2.0.0",
-        "yargs": "^16.2.0",
-        "zone.js": "~0.11.3"
+        "express": "^4.17.1",
+        "nanoid": "^3.1.20",
+        "randomstring": "^1.1.5",
+        "sha.js": "^2.4.11"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "~0.1102.3",
-        "@angular/cli": "~11.2.3",
-        "@angular/compiler-cli": "~11.2.4",
-        "@types/jasmine": "~3.6.0",
+        "@types/axios": "^0.14.0",
+        "@types/cors": "^2.8.10",
+        "@types/express": "^4.17.11",
         "@types/node": "^14.14.31",
-        "@types/yargs": "^16.0.0",
-        "codelyzer": "^6.0.0",
-        "jasmine-core": "~3.6.0",
-        "jasmine-spec-reporter": "~5.0.0",
-        "karma": "~6.1.0",
-        "karma-chrome-launcher": "~3.1.0",
-        "karma-coverage": "~2.0.3",
-        "karma-jasmine": "~4.0.0",
-        "karma-jasmine-html-reporter": "^1.5.0",
-        "protractor": "~7.0.0",
-        "ts-node": "~8.3.0",
-        "tslint": "~6.1.0",
-        "tslint-angular": "^3.0.3",
-        "typescript": "~4.1.5"
+        "@types/randomstring": "^1.1.6",
+        "@types/sha.js": "^2.4.0",
+        "nodemon": "^2.0.7",
+        "ts-node": "^9.1.1",
+        "typescript": "^4.2.3"
     }
 }
