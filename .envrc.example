@@ -1,3 +1,7 @@
 PATH_add node_modules/.bin/
 
-export BASE_URL=https://sandbox.usaepay.com/api/v2
+export USAEPAY_BASE_URL=https://sandbox.usaepay.com/api/v2
+export USAEPAY_API_KEY=
+export USAEPAY_PUBLIC_API_KEY=
+export USAEPAY_API_PIN=
+export SERVER_API_URL=
