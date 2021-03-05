@@ -1,6 +1,7 @@
 import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
+import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
 import { AFakeStoreService } from '../../services/a-fake-store.service';
 import { CartState } from '../../store/states/cart.state';
@@ -13,7 +14,10 @@ export class PaymentKeySaleFormComponent implements OnInit {
     @Select(CartState.showTotal) totalAmount$: any;
     total: any;
 
-    constructor(private afakestoreService: AFakeStoreService) {
+    constructor(
+        private afakestoreService: AFakeStoreService,
+        private toastr: ToastrService
+    ) {
         this.totalAmount$.subscribe((result: any) => {
             this.total = result;
             return result;
@@ -35,6 +39,10 @@ export class PaymentKeySaleFormComponent implements OnInit {
                 'paymentCardErrorContainer'
             ) as HTMLDivElement;
             errorContainer.textContent = errorMessage;
+
+            if (errorMessage) {
+                this.toastr.error(errorMessage);
+            }
         });
 
         let form = document.getElementById('paymentForm') as HTMLFormElement;
@@ -48,6 +56,7 @@ export class PaymentKeySaleFormComponent implements OnInit {
                         'paymentCardErrorContainer'
                     ) as any;
                     errorContainer.textContent = result.error.message;
+                    this.toastr.error(result.error.message);
                 } else {
                     this.tokenHandler(result);
                 }
@@ -59,14 +68,26 @@ export class PaymentKeySaleFormComponent implements OnInit {
         const transactionAmount = formatCurrency(this.total, 'en', '');
 
         try {
-            const response = await this.afakestoreService.processPaymentKeySale(
-                {
-                    payment_key: token,
-                    amount: transactionAmount,
-                }
-            );
+            const {
+                data,
+            } = (await this.afakestoreService.processPaymentKeySale({
+                payment_key: token,
+                amount: transactionAmount,
+            })) as any;
+
+            const { result_code, refnum } = data;
+
+            if (result_code === 'A') {
+                this.toastr.success(
+                    `Success: Your payment has been approved. Your reference number is #${refnum}`
+                );
+            }
         } catch (err) {
             console.error(err);
+            if (err.error.data) {
+                const { error_code, error } = err.error.data;
+                this.toastr.error(`Error ${error_code}: ${error}`);
+            }
         }
 
         var form = document.getElementById('paymentForm') as HTMLFormElement;

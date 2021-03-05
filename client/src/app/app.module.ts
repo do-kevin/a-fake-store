@@ -2,12 +2,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -30,6 +32,7 @@ import { SalesDetailState } from './store/states/sales-detail.state';
     ],
     imports: [
         BrowserModule,
+        NoopAnimationsModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
@@ -39,6 +42,7 @@ import { SalesDetailState } from './store/states/sales-detail.state';
         NgxsFormPluginModule.forRoot(),
         NgxsReduxDevtoolsPluginModule.forRoot(),
         CarouselModule.forRoot(),
+        ToastrModule.forRoot(),
         CreditCardDirectivesModule,
         MyFormsModule,
         FontAwesomeModule,
