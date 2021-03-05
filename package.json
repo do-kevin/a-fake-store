@@ -1,5 +1,5 @@
 {
-    "name": "credit-card-payment",
+    "name": "a-fake-store",
     "version": "0.0.0",
     "description": "",
     "main": "server/index.ts",
@@ -9,7 +9,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/do-kevin/credit-card-payment.git"
+        "url": "git+https://github.com/do-kevin/a-fake-store.git"
     },
     "keywords": [],
     "author": {
@@ -17,9 +17,9 @@
         "email": "do.kevin.vo@gmail.com"
     },
     "bugs": {
-        "url": "https://github.com/do-kevin/credit-card-payment/issues"
+        "url": "https://github.com/do-kevin/a-fake-store/issues"
     },
-    "homepage": "https://github.com/do-kevin/credit-card-payment#readme",
+    "homepage": "https://github.com/do-kevin/a-fake-store#readme",
     "dependencies": {
         "axios": "^0.21.1",
         "cors": "^2.8.5",
