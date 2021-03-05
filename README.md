@@ -35,6 +35,7 @@ $ cp .envrc.example .envrc
 <p>
     To run the front end, change directory into client and run it normally.
 </p>
+
 ```
     cd client && yarn start
 ```
@@ -46,6 +47,7 @@ $ cp .envrc.example .envrc
 <p>
     To run the backend end, you can just npm run nodemon.
 </p>
+
 ```
     yarn dev
 ```
