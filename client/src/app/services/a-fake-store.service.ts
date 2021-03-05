@@ -15,7 +15,8 @@ export class AFakeStoreService {
 
         if (
             environment.SERVER_API_URL === 'undefined' ||
-            !environment.SERVER_API_URL
+            !environment.SERVER_API_URL ||
+            !environment.SERVER_API_URL.length
         ) {
             this.baseUrl = 'http://localhost:8000';
         }
