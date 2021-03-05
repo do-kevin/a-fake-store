@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { CreditCardValidators } from 'angular-cc-library';
+import { ToastrService } from 'ngx-toastr';
 import { MONTH_OPTIONS } from '../../const/input';
 import { AFakeStoreService } from '../../services/a-fake-store.service';
 import { GetTokenSaleForm } from '../../store/actions/sales-detail.actions';
@@ -38,7 +39,8 @@ export class TokenSaleFormComponent implements OnInit {
 
     constructor(
         private store: Store,
-        private afakestoreService: AFakeStoreService
+        private afakestoreService: AFakeStoreService,
+        private toastr: ToastrService
     ) {
         this.totalAmount$.subscribe((result: any) => {
             this.total = result;
@@ -67,10 +69,14 @@ export class TokenSaleFormComponent implements OnInit {
 
         const transactionAmount = formatCurrency(this.total, 'en', '');
 
+        let status = 'INVALID';
+
         this.store
             .dispatch(new GetTokenSaleForm())
             .subscribe(({ sales_detail }) => {
                 const { tokenSaleForm } = sales_detail;
+                status = tokenSaleForm.status;
+
                 const {
                     cardNumber,
                     cardholderName,
@@ -81,23 +87,50 @@ export class TokenSaleFormComponent implements OnInit {
                     zipCode,
                 } = tokenSaleForm.model;
 
-                tokenizationBody = {
-                    cardholder: cardholderName,
-                    number: cardNumber.replace(/\s+/g, ''),
-                    expiration: expirationMonth + expirationYear,
-                    cvc: securityCode,
-                    avs_street: streetAddress,
-                    avs_postalcode: zipCode,
-                    amount: transactionAmount,
-                };
+                if (securityCode.length < 3) {
+                    this.toastr.error('Security code is required');
+                }
+
+                if (status === 'VALID') {
+                    tokenizationBody = {
+                        cardholder: cardholderName,
+                        number: cardNumber.replace(/\s+/g, ''),
+                        expiration: expirationMonth + expirationYear,
+                        cvc: securityCode,
+                        avs_street: streetAddress,
+                        avs_postalcode: zipCode,
+                        amount: transactionAmount,
+                    };
+                }
             });
 
+        if (status === 'INVALID') {
+            this.toastr.error('Form has been filled incorrectly');
+            return;
+        }
+
         try {
-            const response = await this.afakestoreService.processTokenSale(
+            const { data } = (await this.afakestoreService.processTokenSale(
                 tokenizationBody
-            );
+            )) as any;
+
+            const { result_code, refnum } = data;
+
+            if (result_code === 'A') {
+                this.toastr.success(
+                    `Success: Your payment has been approved. Your reference number is #${refnum}`
+                );
+            }
         } catch (err) {
             console.error(err);
+
+            if (!err.error.data) {
+                this.toastr.error(err.statusText);
+            }
+
+            const { error_code, error } = err.error.data;
+
+            this.toastr.error(`Error ${error_code}: ${error}`);
         }
     }
 }

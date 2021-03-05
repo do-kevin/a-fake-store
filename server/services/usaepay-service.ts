@@ -55,20 +55,6 @@ class UsaepayClient {
         this.instance = this.createInstance(this.apiKey);
     };
 
-    async getTransactions() {
-        try {
-            const response = await this.instance({
-                method: 'get',
-                data: {},
-                url: '/transactions',
-            });
-
-            return response;
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
     async createToken(creditcard: CreditCard) {
         try {
             const response = await this.instance({
@@ -83,6 +69,7 @@ class UsaepayClient {
             return response;
         } catch (err) {
             console.error(err);
+            throw err;
         }
     }
 

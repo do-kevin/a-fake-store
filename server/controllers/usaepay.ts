@@ -26,6 +26,12 @@ router.post('/process_token_sale', async (req, res) => {
 
         const { creditcard, savedcard } = data;
 
+        if (data.result_code === 'E') {
+            return res.status(500).send({
+                data,
+            });
+        }
+
         const response = await usaepayClient.processTokenSale({
             creditcard: {
                 ...creditcard,
@@ -34,10 +40,12 @@ router.post('/process_token_sale', async (req, res) => {
             amount,
         });
 
-        const { result, error } = response.data;
+        const { result_code } = response.data;
 
-        if (result === 'Error') {
-            throw new Error(error);
+        if (result_code === 'E') {
+            return res.status(500).send({
+                data: response.data,
+            });
         }
 
         return res.status(200).send({
@@ -58,10 +66,12 @@ router.post('/process_payment_key_sale', async (req, res) => {
             amount,
         });
 
-        const { result, error } = response.data;
+        const { result_code } = response.data;
 
-        if (result === 'Error') {
-            throw new Error(error);
+        if (result_code === 'E') {
+            return res.status(500).send({
+                data: response.data,
+            });
         }
 
         return res.status(200).send({
