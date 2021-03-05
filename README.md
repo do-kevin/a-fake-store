@@ -28,7 +28,6 @@ $ cp .envrc.example .envrc
 <p>
     You will need <b>direnv</b> to use .envrc. You can find the documentation here: <a href="https://direnv.net" target="_blank">https://direnv.net</a>
 </p>
-<br />
 
 #### Client
 
@@ -39,8 +38,6 @@ $ cp .envrc.example .envrc
 ```
     cd client && yarn start
 ```
-
-<br />
 
 #### Server
 
