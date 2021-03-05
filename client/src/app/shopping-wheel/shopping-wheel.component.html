@@ -1,0 +1,8 @@
+<div class="mb-3">
+    <carousel [interval]="0" [showIndicators]="false">
+        <slide *ngFor="let product of products$ | async">
+            <app-product-card [product]="product"></app-product-card>
+        </slide>
+    </carousel>
+    <p class="text-center">Total amount: {{ total | currency }}</p>
+</div>

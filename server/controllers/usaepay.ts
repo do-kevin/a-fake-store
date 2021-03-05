@@ -11,6 +11,7 @@ router.post('/process_token_sale', async (req, res) => {
         cvc,
         avs_street,
         avs_postalcode,
+        amount,
     } = req.body;
 
     try {
@@ -30,7 +31,7 @@ router.post('/process_token_sale', async (req, res) => {
                 ...creditcard,
                 number: savedcard.key,
             },
-            amount: '17.00',
+            amount,
         });
 
         const { result, error } = response.data;
