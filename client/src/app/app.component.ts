@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngxs/store';
 import { setTheme } from 'ngx-bootstrap/utils';
+import { GetAllProducts } from './store/actions/fake-store.actions';
 
 declare global {
     interface Window {
@@ -12,9 +14,11 @@ declare global {
     templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-    constructor() {
+    constructor(private store: Store) {
         setTheme('bs4');
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.store.dispatch(new GetAllProducts());
+    }
 }

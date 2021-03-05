@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, State, StateContext, Store } from '@ngxs/store';
+import { Action, State, StateContext } from '@ngxs/store';
 import { GetTokenSaleForm } from '../actions/sales-detail.actions';
 
 export interface SalesDetailStateModel {
@@ -26,7 +26,7 @@ export interface SalesDetailStateModel {
 })
 @Injectable()
 export class SalesDetailState {
-    constructor(private store: Store) {}
+    constructor() {}
 
     @Action(GetTokenSaleForm)
     getTokenSaleForm(ctx: StateContext<any>) {

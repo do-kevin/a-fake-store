@@ -1,16 +1,21 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { CreditCardValidators } from 'angular-cc-library';
 import { MONTH_OPTIONS } from '../../const/input';
 import { AFakeStoreService } from '../../services/a-fake-store.service';
 import { GetTokenSaleForm } from '../../store/actions/sales-detail.actions';
+import { CartState } from '../../store/states/cart.state';
 
 @Component({
     selector: 'app-token-sale-form',
     templateUrl: './token-sale-form.component.html',
 })
 export class TokenSaleFormComponent implements OnInit {
+    @Select(CartState.showTotal) totalAmount$: any;
+    total: any;
+
     months = MONTH_OPTIONS;
     years = [] as any[];
 
@@ -34,7 +39,12 @@ export class TokenSaleFormComponent implements OnInit {
     constructor(
         private store: Store,
         private afakestoreService: AFakeStoreService
-    ) {}
+    ) {
+        this.totalAmount$.subscribe((result: any) => {
+            this.total = result;
+            return result;
+        });
+    }
 
     ngOnInit(): void {
         const year = new Date().getFullYear();
@@ -52,7 +62,11 @@ export class TokenSaleFormComponent implements OnInit {
 
     async onPay(event: Event) {
         event.preventDefault();
+
         let tokenizationBody = {};
+
+        const transactionAmount = formatCurrency(this.total, 'en', '');
+
         this.store
             .dispatch(new GetTokenSaleForm())
             .subscribe(({ sales_detail }) => {
@@ -74,15 +88,16 @@ export class TokenSaleFormComponent implements OnInit {
                     cvc: securityCode,
                     avs_street: streetAddress,
                     avs_postalcode: zipCode,
+                    amount: transactionAmount,
                 };
             });
 
-        console.log('body', tokenizationBody);
-
-        const response = await this.afakestoreService.processTokenSale(
-            tokenizationBody
-        );
-
-        console.log('res', response);
+        try {
+            const response = await this.afakestoreService.processTokenSale(
+                tokenizationBody
+            );
+        } catch (err) {
+            console.error(err);
+        }
     }
 }

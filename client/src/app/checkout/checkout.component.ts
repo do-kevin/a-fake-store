@@ -13,7 +13,6 @@ export class CheckoutComponent implements OnInit {
     ngOnInit(): void {}
 
     togglePaymentForms() {
-        console.log('type', this.formType);
         if (this.formType === 'paymentKeySale') {
             this.formType = 'tokenSale';
         } else {
