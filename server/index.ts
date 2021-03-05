@@ -8,7 +8,7 @@ require('dotenv').config({
 
 const app = express();
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 
@@ -26,5 +26,5 @@ app.get('/is_online', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server is running at port: ${PORT}`);
 });
