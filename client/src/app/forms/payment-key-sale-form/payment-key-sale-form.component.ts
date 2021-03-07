@@ -45,16 +45,16 @@ export class PaymentKeySaleFormComponent implements OnInit {
             }
         });
 
-        let form = document.getElementById('paymentForm') as HTMLFormElement;
+        const form = document.getElementById('paymentForm') as HTMLFormElement;
 
         form.addEventListener('submit', (event: Event) => {
             event.preventDefault();
 
             client.getPaymentKey(paymentCard).then((result: any) => {
                 if (result.error) {
-                    let errorContainer = document.getElementById(
+                    const errorContainer = document.getElementById(
                         'paymentCardErrorContainer'
-                    ) as any;
+                    ) as HTMLDivElement;
                     errorContainer.textContent = result.error.message;
                     this.toastr.error(result.error.message);
                 } else {

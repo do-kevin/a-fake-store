@@ -10,6 +10,7 @@ export class ShoppingWheelComponent implements OnInit {
     @Select(FakeStoreState.showProducts) products$: any;
     @Select(CartState.showTotal) totalAmount$: any;
     total: any;
+    length: number = 0;
 
     constructor() {
         this.totalAmount$.subscribe((result: any) => {
@@ -18,5 +19,9 @@ export class ShoppingWheelComponent implements OnInit {
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.products$.subscribe((data: any[]) => {
+            this.length = data.length;
+        });
+    }
 }
