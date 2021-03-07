@@ -6,7 +6,7 @@
         [tooltip]="!isServerOnline ? 'Server is offline' : 'Server is online'"
         type="button"
         (click)="hideServerStatus()"
-        @slideUpDown
+        [@slideUpDown]
     >
         <fa-icon
             *ngIf="!isServerOnline"
