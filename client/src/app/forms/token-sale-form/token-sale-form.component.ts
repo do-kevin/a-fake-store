@@ -16,16 +16,24 @@ import { CartState } from '../../store/states/cart.state';
 export class TokenSaleFormComponent implements OnInit {
     @Select(CartState.showTotal) totalAmount$: any;
     total: any;
+    isSubmitting: boolean = false;
 
     months = MONTH_OPTIONS;
     years = [] as any[];
 
     tokenSaleForm = new FormGroup({
-        cardNumber: new FormControl('', [
+        cardNumber: new FormControl(null, {
+            validators: [
+                Validators.required,
+                Validators.minLength(13),
+                Validators.maxLength(19),
+                CreditCardValidators.validateCCNumber,
+            ],
+        }),
+        cardholderName: new FormControl(null, [
             Validators.required,
-            CreditCardValidators.validateCCNumber,
+            Validators.minLength(1),
         ]),
-        cardholderName: new FormControl(),
         securityCode: new FormControl('', [
             Validators.required,
             Validators.minLength(3),
@@ -33,8 +41,15 @@ export class TokenSaleFormComponent implements OnInit {
         ]),
         expirationMonth: new FormControl(null, [Validators.required]),
         expirationYear: new FormControl(null, [Validators.required]),
-        streetAddress: new FormControl('', [Validators.required]),
-        zipCode: new FormControl('', [Validators.required]),
+        streetAddress: new FormControl('', [
+            Validators.required,
+            Validators.minLength(1),
+        ]),
+        zipCode: new FormControl('', [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(9),
+        ]),
     });
 
     constructor(
@@ -49,6 +64,10 @@ export class TokenSaleFormComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.populateYearOptions();
+    }
+
+    populateYearOptions() {
         const year = new Date().getFullYear();
         let yearNum = null;
         for (let i = 0; i < 12; i++) {
@@ -64,34 +83,31 @@ export class TokenSaleFormComponent implements OnInit {
 
     async onPay(event: Event) {
         event.preventDefault();
-
         let tokenizationBody = {};
+        this.isSubmitting = true;
 
-        const transactionAmount = formatCurrency(this.total, 'en', '');
+        if (this.tokenSaleForm.status === 'VALID') {
+            const transactionAmount = formatCurrency(this.total, 'en', '');
 
-        let status = 'INVALID';
+            this.store
+                .dispatch(new GetTokenSaleForm())
+                .subscribe(({ sales_detail }) => {
+                    const { tokenSaleForm } = sales_detail;
 
-        this.store
-            .dispatch(new GetTokenSaleForm())
-            .subscribe(({ sales_detail }) => {
-                const { tokenSaleForm } = sales_detail;
-                status = tokenSaleForm.status;
+                    const {
+                        cardNumber,
+                        cardholderName,
+                        expirationMonth,
+                        expirationYear,
+                        securityCode,
+                        streetAddress,
+                        zipCode,
+                    } = tokenSaleForm.model;
 
-                const {
-                    cardNumber,
-                    cardholderName,
-                    expirationMonth,
-                    expirationYear,
-                    securityCode,
-                    streetAddress,
-                    zipCode,
-                } = tokenSaleForm.model;
+                    if (securityCode.length < 3) {
+                        this.toastr.error('Security code is required');
+                    }
 
-                if (securityCode.length < 3) {
-                    this.toastr.error('Security code is required');
-                }
-
-                if (status === 'VALID') {
                     tokenizationBody = {
                         cardholder: cardholderName,
                         number: cardNumber.replace(/\s+/g, ''),
@@ -101,36 +117,63 @@ export class TokenSaleFormComponent implements OnInit {
                         avs_postalcode: zipCode,
                         amount: transactionAmount,
                     };
+                });
+
+            try {
+                const { data } = (await this.afakestoreService.processTokenSale(
+                    tokenizationBody
+                )) as any;
+
+                const { result_code, refnum } = data;
+
+                if (result_code === 'A') {
+                    this.toastr.success(
+                        `Success: Your payment has been approved. Your reference number is #${refnum}`
+                    );
                 }
-            });
+            } catch (err) {
+                console.error(err);
 
-        if (status === 'INVALID') {
-            this.toastr.error('Form has been filled incorrectly');
-            return;
-        }
+                if (!err.error.data) {
+                    this.toastr.error(err.statusText);
+                }
 
-        try {
-            const { data } = (await this.afakestoreService.processTokenSale(
-                tokenizationBody
-            )) as any;
+                const { error_code, error } = err.error.data;
 
-            const { result_code, refnum } = data;
-
-            if (result_code === 'A') {
-                this.toastr.success(
-                    `Success: Your payment has been approved. Your reference number is #${refnum}`
-                );
+                this.toastr.error(`Error ${error_code}: ${error}`);
             }
-        } catch (err) {
-            console.error(err);
-
-            if (!err.error.data) {
-                this.toastr.error(err.statusText);
-            }
-
-            const { error_code, error } = err.error.data;
-
-            this.toastr.error(`Error ${error_code}: ${error}`);
+        } else {
+            this.toastr.error(
+                'Your credit card information has been filled incorrectly'
+            );
         }
+    }
+
+    get cardNumber() {
+        return this.tokenSaleForm.get('cardNumber');
+    }
+
+    get cardholderName() {
+        return this.tokenSaleForm.get('cardholderName');
+    }
+
+    get expirationMonth() {
+        return this.tokenSaleForm.get('expirationMonth');
+    }
+
+    get expirationYear() {
+        return this.tokenSaleForm.get('expirationYear');
+    }
+
+    get securityCode() {
+        return this.tokenSaleForm.get('securityCode');
+    }
+
+    get streetAddress() {
+        return this.tokenSaleForm.get('streetAddress');
+    }
+
+    get zipCode() {
+        return this.tokenSaleForm.get('zipCode');
     }
 }
