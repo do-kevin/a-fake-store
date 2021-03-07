@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 
+const { production, SERVER_API_URL } = environment;
+
 @Injectable({
     providedIn: 'root',
 })
@@ -9,15 +11,19 @@ export class AFakeStoreService {
     private baseUrl: string = 'http://localhost:8000';
 
     constructor(private http: HttpClient) {
-        if (environment.SERVER_API_URL) {
-            this.baseUrl = environment.SERVER_API_URL;
+        if (production) {
+            this.baseUrl = SERVER_API_URL;
+
+            if (
+                SERVER_API_URL === 'undefined' ||
+                !SERVER_API_URL ||
+                !SERVER_API_URL.length
+            ) {
+                this.baseUrl = 'http://localhost:8000';
+            }
         }
 
-        if (
-            environment.SERVER_API_URL === 'undefined' ||
-            !environment.SERVER_API_URL ||
-            !environment.SERVER_API_URL.length
-        ) {
+        if (!production) {
             this.baseUrl = 'http://localhost:8000';
         }
     }
@@ -42,5 +48,9 @@ export class AFakeStoreService {
                 {}
             )
             .toPromise();
+    }
+
+    async checkServerStatus() {
+        return this.http.get(`${this.baseUrl}/is_online`, {}).toPromise();
     }
 }
