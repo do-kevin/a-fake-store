@@ -4,7 +4,9 @@
     (ngSubmit)="onPay($event)"
 >
     <div class="form-group">
-        <label for="cc-number">Card number</label>
+        <label for="cc-number">
+            Card number <span class="text-danger">*</span>
+        </label>
         <input
             class="form-control"
             formControlName="cardNumber"
@@ -12,24 +14,62 @@
             type="tel"
             autocomplete="cc-number"
             ccNumber
+            [ngClass]="{
+                'is-invalid':
+                    (cardNumber?.errors?.required ||
+                        cardNumber?.status === 'INVALID') &&
+                    cardNumber?.dirty
+            }"
         />
+        <div
+            *ngIf="
+                (cardNumber?.errors?.required ||
+                    cardNumber?.status === 'INVALID') &&
+                cardNumber?.dirty
+            "
+            class="text-danger"
+        >
+            Please enter a valid credit card number
+        </div>
     </div>
     <div class="form-group">
-        <label for="cardholderNameInput">Name on card</label>
+        <label for="cardholderNameInput">
+            Name on card <span class="text-danger">*</span>
+        </label>
         <input
             type="text"
             class="form-control"
             formControlName="cardholderName"
+            [ngClass]="{
+                'is-invalid':
+                    cardholderName?.status === 'INVALID' &&
+                    cardholderName?.dirty
+            }"
         />
+        <div
+            *ngIf="
+                cardholderName?.status === 'INVALID' && cardholderName?.dirty
+            "
+            class="text-danger"
+        >
+            Please enter the name of the card holder
+        </div>
     </div>
     <div class="row">
         <div class="col d-flex flex-row">
             <div class="col-6 pl-0">
-                <label for="expirationInput">Expiration date</label>
+                <label for="expirationInput">
+                    Expiration date <span class="text-danger">*</span>
+                </label>
                 <div class="form-group">
                     <select
                         class="form-control"
                         formControlName="expirationMonth"
+                        [ngClass]="{
+                            'is-invalid background-image-none':
+                                expirationMonth?.errors?.required &&
+                                expirationMonth?.touched
+                        }"
                     >
                         <option
                             *ngFor="let month of months"
@@ -38,14 +78,30 @@
                             {{ month.text }}
                         </option>
                     </select>
+                    <div
+                        *ngIf="
+                            expirationMonth?.errors?.required &&
+                            expirationMonth?.touched
+                        "
+                        class="text-danger"
+                    >
+                        Please select a month
+                    </div>
                 </div>
             </div>
             <div class="col-6 pr-0">
                 <div class="form-group">
-                    <label class="text-transparent">Year</label>
+                    <label class="text-transparent user-select-none">
+                        Year
+                    </label>
                     <select
                         class="form-control"
                         formControlName="expirationYear"
+                        [ngClass]="{
+                            'is-invalid background-image-none':
+                                expirationYear?.errors?.required &&
+                                expirationYear?.touched
+                        }"
                     >
                         <option
                             *ngFor="let year of years"
@@ -54,12 +110,23 @@
                             {{ year.text }}
                         </option>
                     </select>
+                    <div
+                        *ngIf="
+                            expirationYear?.errors?.required &&
+                            expirationYear?.touched
+                        "
+                        class="text-danger"
+                    >
+                        Please select a year
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="form-group">
-                <label for="cc-cvc">Security Code (CVC)</label>
+                <label for="cc-cvc">
+                    Security Code (CVC) <span class="text-danger">*</span>
+                </label>
                 <input
                     type="tel"
                     class="form-control"
@@ -67,31 +134,75 @@
                     autocomplete="off"
                     ccCVC
                     formControlName="securityCode"
+                    [ngClass]="{
+                        'is-invalid':
+                            (securityCode?.errors?.required ||
+                                securityCode?.status === 'INVALID') &&
+                            securityCode?.dirty
+                    }"
                 />
+                <div
+                    *ngIf="
+                        (securityCode?.errors?.required ||
+                            securityCode?.status === 'INVALID') &&
+                        securityCode?.dirty
+                    "
+                    class="text-danger"
+                >
+                    Please enter a valid security code
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-9">
             <div class="form-group">
-                <label for="avs-street">Street address</label>
+                <label for="avs-street">
+                    Street address <span class="text-danger">*</span>
+                </label>
                 <input
                     type="text"
                     class="form-control"
                     id="avs-street"
                     formControlName="streetAddress"
+                    [ngClass]="{
+                        'is-invalid':
+                            streetAddress?.status === 'INVALID' &&
+                            streetAddress?.dirty
+                    }"
                 />
+                <div
+                    *ngIf="
+                        streetAddress?.status === 'INVALID' &&
+                        streetAddress?.dirty
+                    "
+                    class="text-danger"
+                >
+                    Please enter the street address
+                </div>
             </div>
         </div>
         <div class="col-3">
             <div class="form-group">
-                <label for="creditCardZipCodeInput">Zip code</label>
+                <label for="creditCardZipCodeInput">
+                    Zip code <span class="text-danger">*</span>
+                </label>
                 <input
                     type="text"
                     class="form-control"
                     id="creditCardZipCodeInput"
                     formControlName="zipCode"
+                    [ngClass]="{
+                        'is-invalid':
+                            zipCode?.status === 'INVALID' && zipCode?.dirty
+                    }"
                 />
+                <div
+                    *ngIf="zipCode?.status === 'INVALID' && zipCode?.dirty"
+                    class="text-danger"
+                >
+                    Please enter the zip code
+                </div>
             </div>
         </div>
     </div>

@@ -31,3 +31,50 @@ body {
 .right-0 {
     right: 0;
 }
+
+.background-image-none {
+    background-image: none !important;
+}
+
+#paymentCardErrorContainer {
+    color: #dc3545;
+}
+
+.product-card-skeleton {
+    max-width: 17rem;
+    height: 21rem;
+    background-image: linear-gradient(
+        to right,
+        rgb(248 249 250 / 5%) 0%,
+        rgb(248 249 250 / 5%) 25%,
+        hsl(210deg 17% 96%) 50%,
+        rgb(248 249 250 / 5%) 100%
+    );
+    background-repeat: no-repeat;
+    animation: shine 1050ms ease-in-out infinite;
+    &__skeleton-btn {
+        height: 2.7rem;
+        width: 16rem;
+        top: 17rem;
+        background-image: none;
+    }
+}
+
+@keyframes shine {
+    0% {
+        background-position: -50rem 0;
+    }
+    100% {
+        background-position: 50rem 0;
+    }
+}
+
+.user-select-none {
+    pointer-events: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
