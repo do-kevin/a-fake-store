@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root',
 })
 export class FakeStoreApiService {
-    private fakeStoreApiUrl: string = 'https://fakestoreapi.com';
+    private fakeStoreApiUrl: string = 'https://fakestoreapi.herokuapp.com';
 
     constructor(private http: HttpClient) {}
 
