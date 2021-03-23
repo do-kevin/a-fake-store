@@ -1,27 +1,25 @@
-<div>
-    <div
-        *ngIf="showServerStatus"
-        class="p-2 mb-2 mr-2 rounded shadow-lg bg-white position-fixed bottom-0 right-0"
-        style="z-index: 1"
-        [tooltip]="!isServerOnline ? 'Server is offline' : 'Server is online'"
-        type="button"
-        (click)="hideServerStatus()"
-        [@slideUpDown]
-    >
-        <fa-icon
-            *ngIf="!isServerOnline"
-            class="text-danger"
-            [icon]="faExclamationTriangle"
-        ></fa-icon>
-        <fa-icon
-            *ngIf="isServerOnline"
-            class="text-dark"
-            [icon]="faServer"
-        ></fa-icon>
-    </div>
-    <app-navbar></app-navbar>
-    <app-shopping-wheel></app-shopping-wheel>
-    <div class="p-4">
-        <app-checkout></app-checkout>
-    </div>
+<div
+    *ngIf="showServerStatus"
+    class="p-2 mb-2 mr-2 rounded shadow-lg bg-white position-fixed bottom-0 right-0"
+    style="z-index: 1"
+    [tooltip]="!isServerOnline ? 'Server is offline' : 'Server is online'"
+    type="button"
+    (click)="hideServerStatus()"
+    [@slideUpDown]
+>
+    <fa-icon
+        *ngIf="!isServerOnline"
+        class="text-danger"
+        [icon]="faExclamationTriangle"
+    ></fa-icon>
+    <fa-icon
+        *ngIf="isServerOnline"
+        class="text-dark"
+        [icon]="faServer"
+    ></fa-icon>
+</div>
+<router-outlet></router-outlet>
+<app-shopping-wheel></app-shopping-wheel>
+<div class="p-4">
+    <app-checkout></app-checkout>
 </div>

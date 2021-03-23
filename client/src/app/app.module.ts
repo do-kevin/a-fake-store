@@ -12,22 +12,23 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyFormsModule } from './forms/forms.module';
-import { NavbarComponent } from './navbar/navbar.component';
+import { ReplaceAFakeStoreApiUrlPipe } from './pipes/replace-afake-store-api-url.pipe';
+// import { NavbarComponent } from './navbar/navbar.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { AFakeStoreService } from './services/a-fake-store.service';
 import { ShoppingWheelComponent } from './shopping-wheel/shopping-wheel.component';
 import { CartState } from './store/states/cart.state';
 import { FakeStoreState } from './store/states/fake-store.state';
 import { SalesDetailState } from './store/states/sales-detail.state';
-import { ReplaceAFakeStoreApiUrlPipe } from './pipes/replace-afake-store-api-url.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavbarComponent,
+        // NavbarComponent,
         CheckoutComponent,
         ShoppingWheelComponent,
         ProductCardComponent,
@@ -50,6 +51,7 @@ import { ReplaceAFakeStoreApiUrlPipe } from './pipes/replace-afake-store-api-url
         MyFormsModule,
         FontAwesomeModule,
         TooltipModule.forRoot(),
+        AppRoutingModule,
     ],
     providers: [AFakeStoreService],
     bootstrap: [AppComponent],

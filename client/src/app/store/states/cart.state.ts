@@ -25,6 +25,11 @@ export class CartState {
         return state.total;
     }
 
+    @Selector()
+    static showNumOfItemsInCart(state: CartStateModel) {
+        return Object.values(state.products).length;
+    }
+
     @Action(AddItemToCart)
     addItemToCart(
         { getState, setState }: StateContext<CartStateModel>,
