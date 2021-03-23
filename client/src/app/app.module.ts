@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,13 +29,13 @@ import { SalesDetailState } from './store/states/sales-detail.state';
 @NgModule({
     declarations: [
         AppComponent,
-        // NavbarComponent,
-        CheckoutComponent,
         ShoppingWheelComponent,
+        CheckoutComponent,
         ProductCardComponent,
         ReplaceAFakeStoreApiUrlPipe,
     ],
     imports: [
+        CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,

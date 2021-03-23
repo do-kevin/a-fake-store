@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { reject } from 'lodash';
+import { reject } from 'lodash-es';
 import { AddItemToCart, RemoveItemFromCart } from '../actions/cart.actions';
 import { Product } from './fake-store.state';
 
