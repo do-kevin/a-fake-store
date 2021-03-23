@@ -1,6 +1,6 @@
 <div class="d-block mx-auto py-3" style="max-width: 17rem">
     <img
-        [src]="product.image"
+        [src]="product.image | replaceAFakeStoreApiUrl"
         class="mx-auto d-block"
         style="height: 15rem; object-fit: contain; max-width: 17rem"
     />
