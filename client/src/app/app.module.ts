@@ -22,6 +22,7 @@ import { ShoppingWheelComponent } from './shopping-wheel/shopping-wheel.componen
 import { CartState } from './store/states/cart.state';
 import { FakeStoreState } from './store/states/fake-store.state';
 import { SalesDetailState } from './store/states/sales-detail.state';
+import { ReplaceAFakeStoreApiUrlPipe } from './pipes/replace-afake-store-api-url.pipe';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { SalesDetailState } from './store/states/sales-detail.state';
         CheckoutComponent,
         ShoppingWheelComponent,
         ProductCardComponent,
+        ReplaceAFakeStoreApiUrlPipe,
     ],
     imports: [
         BrowserModule,
