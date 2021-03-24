@@ -1,0 +1,13 @@
+<!-- <p class="text-center">Total amount: {{ total | currency }}</p> -->
+
+<div
+    class="row w-100 mx-0 flex-wrap justify-content-center"
+    style="padding-top: 4rem"
+>
+    <div
+        class="col-xl-3 col-lg-4 col-md-5 col-sm-6 col-xs-12"
+        *ngFor="let product of products$ | async"
+    >
+        <app-product-card *ngIf="length" [product]="product"></app-product-card>
+    </div>
+</div>

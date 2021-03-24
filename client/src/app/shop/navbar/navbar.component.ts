@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Select } from '@ngxs/store';
 import { CartState } from 'src/app/store/states/cart.state';
@@ -8,6 +8,10 @@ import { CartState } from 'src/app/store/states/cart.state';
     templateUrl: './navbar.component.html',
 })
 export class NavbarComponent implements OnInit {
+    @HostBinding('class') classes =
+        'navbar navbar-light border-bottom px-4 bg-white position-fixed w-100';
+    @HostBinding('style') style = 'z-index: 2; top: 0';
+
     @Select(CartState.showNumOfItemsInCart)
     numOfItemsInCart$: any;
     numOfItemsInCart: number = 0;
