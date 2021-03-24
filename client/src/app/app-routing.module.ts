@@ -12,7 +12,7 @@ const routes: Routes = [
         component: ShopComponent,
     },
     {
-        path: 'payment',
+        path: 'payment-details',
         component: PaymentComponent,
     },
 ];

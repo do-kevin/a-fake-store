@@ -21,6 +21,11 @@ export class CartState {
     constructor(private store: Store) {}
 
     @Selector()
+    static showCartItems(state: CartStateModel) {
+        return state.products;
+    }
+
+    @Selector()
     static showTotal(state: CartStateModel) {
         return state.total;
     }

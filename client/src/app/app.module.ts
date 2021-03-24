@@ -9,7 +9,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
@@ -23,13 +23,7 @@ import { FakeStoreState } from './store/states/fake-store.state';
 import { SalesDetailState } from './store/states/sales-detail.state';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        // CollectionComponent,
-        CheckoutComponent,
-        // ProductCardComponent,
-        // ReplaceAFakeStoreApiUrlPipe,
-    ],
+    declarations: [AppComponent, CheckoutComponent],
     imports: [
         CommonModule,
         BrowserModule,
@@ -42,7 +36,7 @@ import { SalesDetailState } from './store/states/sales-detail.state';
         }),
         NgxsFormPluginModule.forRoot(),
         NgxsReduxDevtoolsPluginModule.forRoot(),
-        CarouselModule.forRoot(),
+        CollapseModule.forRoot(),
         ToastrModule.forRoot(),
         CreditCardDirectivesModule,
         MyFormsModule,
