@@ -11,16 +11,21 @@ import { CartState } from '../store/states/cart.state';
 export class ShopComponent {
     @Select(CartState.showCartItems) items$: any;
     @Select(CartState.showTotal) totalAmount$: any;
+    @Select(CartState.showNumOfItemsInCart) numOfItemsInCart$: any;
     isCollapsed: boolean;
     total: any;
     faTimes = faTimes;
     faTrashAlt = faTrashAlt;
+    numOfCartItems: number = 0;
 
     constructor(private store: Store) {
         this.isCollapsed = false;
         this.totalAmount$.subscribe((result: any) => {
             this.total = result;
         });
+        this.numOfItemsInCart$.subscribe(
+            (result: any) => (this.numOfCartItems = result)
+        );
     }
 
     openCart = () => {

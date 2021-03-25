@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyFormsModule } from './forms/forms.module';
+import { PipesModule } from './pipes/pipes.module';
 import { AFakeStoreService } from './services/a-fake-store.service';
 import { CartState } from './store/states/cart.state';
 import { FakeStoreState } from './store/states/fake-store.state';
@@ -43,6 +44,7 @@ import { SalesDetailState } from './store/states/sales-detail.state';
         FontAwesomeModule,
         TooltipModule.forRoot(),
         AppRoutingModule,
+        PipesModule,
     ],
     providers: [AFakeStoreService],
     bootstrap: [AppComponent],
