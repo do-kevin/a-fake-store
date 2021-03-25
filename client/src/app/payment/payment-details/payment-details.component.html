@@ -1,0 +1,31 @@
+<div>
+    <h3>Payment</h3>
+    <div class="mb-3">
+        <button
+            class="btn btn-lg rounded-0-right rounded-left"
+            (click)="setTokenSaleForm()"
+            [ngClass]="
+                formType === 'paymentKeySale'
+                    ? 'btn-outline-secondary'
+                    : 'btn-primary'
+            "
+        >
+            Customer
+        </button>
+        <button
+            class="btn btn-lg rounded-0-left rounded-right"
+            (click)="setPaymentKeySaleForm()"
+            [ngClass]="
+                formType === 'tokenSale'
+                    ? 'btn-outline-secondary'
+                    : 'btn-primary'
+            "
+        >
+            Employee
+        </button>
+    </div>
+    <app-payment-key-sale-form
+        *ngIf="formType === 'paymentKeySale'"
+    ></app-payment-key-sale-form>
+    <app-token-sale-form *ngIf="formType === 'tokenSale'"></app-token-sale-form>
+</div>

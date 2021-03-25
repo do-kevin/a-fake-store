@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { reject } from 'lodash';
+import { reject } from 'lodash-es';
 import { AddItemToCart, RemoveItemFromCart } from '../actions/cart.actions';
 import { Product } from './fake-store.state';
 
@@ -21,8 +21,18 @@ export class CartState {
     constructor(private store: Store) {}
 
     @Selector()
+    static showCartItems(state: CartStateModel) {
+        return state.products;
+    }
+
+    @Selector()
     static showTotal(state: CartStateModel) {
         return state.total;
+    }
+
+    @Selector()
+    static showNumOfItemsInCart(state: CartStateModel) {
+        return Object.values(state.products).length;
     }
 
     @Action(AddItemToCart)

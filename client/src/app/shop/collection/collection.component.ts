@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { CartState } from '../store/states/cart.state';
-import { FakeStoreState } from '../store/states/fake-store.state';
+import { CartState } from 'src/app/store/states/cart.state';
+import { FakeStoreState } from 'src/app/store/states/fake-store.state';
+
 @Component({
-    selector: 'app-shopping-wheel',
-    templateUrl: './shopping-wheel.component.html',
+    selector: 'app-collection',
+    templateUrl: './collection.component.html',
 })
-export class ShoppingWheelComponent implements OnInit {
+export class CollectionComponent implements OnInit {
     @Select(FakeStoreState.showProducts) products$: any;
     @Select(CartState.showTotal) totalAmount$: any;
     total: any;

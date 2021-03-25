@@ -1,0 +1,72 @@
+<style>
+    #cart-list::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+</style>
+<div
+    class="h-100 w-100 position-fixed"
+    style="z-index: 4; background-color: rgba(0, 0, 0, 0.4)"
+    [collapse]="!isCollapsed"
+    [isAnimated]="true"
+>
+    <div
+        class="h-100 bg-white position-absolute d-flex justify-content-center"
+        style="right: 0; flex-direction: column; width: 25rem"
+    >
+        <section class="col-10 mx-auto px-0 pt-3">
+            <button
+                class="btn rounded-circle mx-auto d-block bg-white"
+                (click)="isCollapsed = false"
+            >
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+            <div id="cart-list" class="overflow-auto" style="height: 90%">
+                <div
+                    class="row mx-0 rounded mb-3"
+                    *ngFor="let product of items$ | async"
+                >
+                    <img
+                        class="col-2 px-0"
+                        [src]="product.image | replaceAFakeStoreApiUrl"
+                        style="object-fit: contain"
+                    />
+                    <div class="col-10">
+                        <p
+                            class="font-weight-bold my-0"
+                            style="line-height: 1.2"
+                        >
+                            {{ product.title }}
+                        </p>
+                        <p class="my-0">
+                            Price: {{ product.price | currency }}
+                        </p>
+                        <button
+                            class="btn p-0 text-danger"
+                            (click)="removeFromCart(product)"
+                        >
+                            <fa-icon [icon]="faTrashAlt"></fa-icon>
+                            <span
+                                class="position-relative"
+                                style="bottom: 1.5px"
+                            >
+                                remove
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="col w-100 mt-2">
+            <p class="text-center">Total amount: {{ total | currency }}</p>
+            <a
+                class="btn btn-outline-primary w-100"
+                [routerLink]="['/payment-details']"
+            >
+                CHECKOUT
+            </a>
+        </section>
+    </div>
+</div>
+<app-navbar [openCart]="openCart"></app-navbar>
+<app-collection></app-collection>

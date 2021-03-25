@@ -1,31 +1,33 @@
-<div class="d-block mx-auto py-3" style="max-width: 17rem">
-    <img
-        [src]="product.image | replaceAFakeStoreApiUrl"
-        class="mx-auto d-block"
-        style="height: 15rem; object-fit: contain; max-width: 17rem"
-    />
-    <div>
-        <p class="mb-1 font-weight-light">
-            {{ product.title }}
-        </p>
-        <p class="mb-2 font-weight-bold">
-            {{ product.price | currency }}
-        </p>
-        <button
-            *ngIf="!addedToCart"
-            type="button"
-            class="btn btn-outline-primary w-100"
-            (click)="onAddToCart(product)"
-        >
-            Add to cart
-        </button>
-        <button
-            *ngIf="addedToCart"
-            type="button"
-            class="btn btn-primary w-100"
-            (click)="removeFromCart(product)"
-        >
-            Added to cart
-        </button>
-    </div>
+<img
+    [src]="product.image | replaceAFakeStoreApiUrl"
+    class="mx-auto d-block w-100"
+    style="height: 15rem; object-fit: contain"
+/>
+
+<div style="height: 8.5rem" class="mt-3">
+    <p class="mb-1 font-weight-light">
+        {{ product.title }}
+    </p>
+    <p class="mb-2 font-weight-bold">
+        {{ product.price | currency }}
+    </p>
 </div>
+
+<footer>
+    <button
+        *ngIf="!addedToCart"
+        type="button"
+        class="btn btn-outline-primary w-100"
+        (click)="onAddToCart(product)"
+    >
+        Add to cart
+    </button>
+    <button
+        *ngIf="addedToCart"
+        type="button"
+        class="btn btn-primary w-100"
+        (click)="removeFromCart(product)"
+    >
+        Added to cart
+    </button>
+</footer>
