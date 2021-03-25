@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { CartState } from 'src/app/store/states/cart.state';
 
 type FormType = 'tokenSale' | 'paymentKeySale';
 
@@ -7,8 +9,17 @@ type FormType = 'tokenSale' | 'paymentKeySale';
     templateUrl: './payment-details.component.html',
 })
 export class PaymentDetailsComponent implements OnInit {
+    @HostBinding('class') classes = 'row mx-0 h-100';
+    @Select(CartState.showCartItems) items$: any;
+    @Select(CartState.showTotal) totalAmount$: any;
+    total: any;
     formType: FormType = 'tokenSale';
-    constructor() {}
+
+    constructor() {
+        this.totalAmount$.subscribe((result: any) => {
+            this.total = result;
+        });
+    }
 
     ngOnInit(): void {}
 

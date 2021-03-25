@@ -16,55 +16,38 @@
     >
         <section class="col-10 mx-auto px-0 pt-3">
             <button
-                class="btn rounded-circle mx-auto d-block bg-white"
+                class="btn rounded-circle mx-auto d-block bg-white mb-2"
                 (click)="isCollapsed = false"
             >
                 <fa-icon [icon]="faTimes"></fa-icon>
             </button>
-            <div id="cart-list" class="overflow-auto" style="height: 90%">
-                <div
-                    class="row mx-0 rounded mb-3"
+            <div
+                id="cart-list"
+                class="overflow-auto d-flex flex-column justify-content-center pt-3"
+                style="height: 90%"
+            >
+                <app-cart-item
                     *ngFor="let product of items$ | async"
+                    [product]="product"
+                ></app-cart-item>
+                <div
+                    *ngIf="numOfCartItems === 0"
+                    class="m-auto text-muted h2 font-weight-normal"
                 >
-                    <img
-                        class="col-2 px-0"
-                        [src]="product.image | replaceAFakeStoreApiUrl"
-                        style="object-fit: contain"
-                    />
-                    <div class="col-10">
-                        <p
-                            class="font-weight-bold my-0"
-                            style="line-height: 1.2"
-                        >
-                            {{ product.title }}
-                        </p>
-                        <p class="my-0">
-                            Price: {{ product.price | currency }}
-                        </p>
-                        <button
-                            class="btn p-0 text-danger"
-                            (click)="removeFromCart(product)"
-                        >
-                            <fa-icon [icon]="faTrashAlt"></fa-icon>
-                            <span
-                                class="position-relative"
-                                style="bottom: 1.5px"
-                            >
-                                remove
-                            </span>
-                        </button>
-                    </div>
+                    Cart is empty
                 </div>
             </div>
         </section>
         <section class="col w-100 mt-2">
             <p class="text-center">Total amount: {{ total | currency }}</p>
-            <a
+            <button
                 class="btn btn-outline-primary w-100"
+                type="button"
                 [routerLink]="['/payment-details']"
+                [disabled]="numOfCartItems === 0"
             >
                 CHECKOUT
-            </a>
+            </button>
         </section>
     </div>
 </div>
