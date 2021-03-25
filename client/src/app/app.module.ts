@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -8,32 +9,24 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyFormsModule } from './forms/forms.module';
-import { NavbarComponent } from './navbar/navbar.component';
-import { ProductCardComponent } from './product-card/product-card.component';
+import { PipesModule } from './pipes/pipes.module';
 import { AFakeStoreService } from './services/a-fake-store.service';
-import { ShoppingWheelComponent } from './shopping-wheel/shopping-wheel.component';
 import { CartState } from './store/states/cart.state';
 import { FakeStoreState } from './store/states/fake-store.state';
 import { SalesDetailState } from './store/states/sales-detail.state';
-import { ReplaceAFakeStoreApiUrlPipe } from './pipes/replace-afake-store-api-url.pipe';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavbarComponent,
-        CheckoutComponent,
-        ShoppingWheelComponent,
-        ProductCardComponent,
-        ReplaceAFakeStoreApiUrlPipe,
-    ],
+    declarations: [AppComponent, CheckoutComponent],
     imports: [
+        CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -44,12 +37,14 @@ import { ReplaceAFakeStoreApiUrlPipe } from './pipes/replace-afake-store-api-url
         }),
         NgxsFormPluginModule.forRoot(),
         NgxsReduxDevtoolsPluginModule.forRoot(),
-        CarouselModule.forRoot(),
+        CollapseModule.forRoot(),
         ToastrModule.forRoot(),
         CreditCardDirectivesModule,
         MyFormsModule,
         FontAwesomeModule,
         TooltipModule.forRoot(),
+        AppRoutingModule,
+        PipesModule,
     ],
     providers: [AFakeStoreService],
     bootstrap: [AppComponent],

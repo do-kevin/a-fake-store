@@ -1,0 +1,55 @@
+<style>
+    #cart-list::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+</style>
+<div
+    class="h-100 w-100 position-fixed"
+    style="z-index: 4; background-color: rgba(0, 0, 0, 0.4)"
+    [collapse]="!isCollapsed"
+    [isAnimated]="true"
+>
+    <div
+        class="h-100 bg-white position-absolute d-flex justify-content-center"
+        style="right: 0; flex-direction: column; width: 25rem"
+    >
+        <section class="col-10 mx-auto px-0 pt-3">
+            <button
+                class="btn rounded-circle mx-auto d-block bg-white mb-2"
+                (click)="isCollapsed = false"
+            >
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+            <div
+                id="cart-list"
+                class="overflow-auto d-flex flex-column justify-content-center pt-3"
+                style="height: 90%"
+            >
+                <app-cart-item
+                    *ngFor="let product of items$ | async"
+                    [product]="product"
+                ></app-cart-item>
+                <div
+                    *ngIf="numOfCartItems === 0"
+                    class="m-auto text-muted h2 font-weight-normal"
+                >
+                    Cart is empty
+                </div>
+            </div>
+        </section>
+        <section class="col w-100 mt-2">
+            <p class="text-center">Total amount: {{ total | currency }}</p>
+            <button
+                class="btn btn-outline-primary w-100"
+                type="button"
+                [routerLink]="['/payment-details']"
+                [disabled]="numOfCartItems === 0"
+            >
+                CHECKOUT
+            </button>
+        </section>
+    </div>
+</div>
+<app-navbar [openCart]="openCart"></app-navbar>
+<app-collection></app-collection>
