@@ -1,9 +1,5 @@
 <!-- <div class="row mx-0 rounded mb-3" *ngFor="let product of items$ | async"> -->
-<img
-    class="col-2 px-0"
-    [src]="product.image | replaceAFakeStoreApiUrl"
-    style="object-fit: contain"
-/>
+<img class="col-2 px-0" [src]="product.image" style="object-fit: contain" />
 <div class="col-10">
     <p class="font-weight-bold my-0" style="line-height: 1.2">
         {{ product.title }}
