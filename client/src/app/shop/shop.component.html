@@ -23,7 +23,11 @@
             </button>
             <div
                 id="cart-list"
-                class="overflow-auto d-flex flex-column justify-content-center pt-3"
+                class="overflow-auto flex-column"
+                [ngClass]="{
+                    'justify-content-center': numOfCartItems === 0,
+                    'd-flex': numOfCartItems === 0
+                }"
                 style="height: 90%"
             >
                 <app-cart-item

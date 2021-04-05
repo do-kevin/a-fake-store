@@ -5,3 +5,6 @@ export USAEPAY_API_KEY=
 export USAEPAY_PUBLIC_API_KEY=
 export USAEPAY_API_PIN=
 export SERVER_API_URL=
+
+# If this api url fails, the developer may switch to https://fakestoreapi.herokuapp.com
+export FAKE_STORE_API_URL=https://fakestoreapi.com
