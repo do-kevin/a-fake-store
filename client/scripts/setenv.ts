@@ -20,7 +20,8 @@ const environmentFileContent = `export const environment = {
     USAEPAY_API_KEY: '${process.env.USAEPAY_API_KEY}',
     USAEPAY_PUBLIC_API_KEY: '${process.env.USAEPAY_PUBLIC_API_KEY}',
     USAEPAY_API_PIN: '${process.env.USAEPAY_API_PIN}',
-    SERVER_API_URL: '${process.env.SERVER_API_URL}'
+    SERVER_API_URL: '${process.env.SERVER_API_URL}',
+    FAKE_STORE_API_URL: '${process.env.FAKE_STORE_API_URL}'
 };
 `;
 
