@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngxs/store';
 import { setTheme } from 'ngx-bootstrap/utils';
-import { AFakeStoreService } from './services/a-fake-store.service';
+import { ServerService } from './services/server.service';
 import { GetAllProducts } from './store/actions/fake-store.actions';
 
 declare global {
@@ -37,10 +37,7 @@ export class AppComponent implements OnInit {
     faExclamationTriangle = faExclamationTriangle;
     showServerStatus: boolean = true;
 
-    constructor(
-        private store: Store,
-        private afakestoreService: AFakeStoreService
-    ) {
+    constructor(private store: Store, private server: ServerService) {
         setTheme('bs4');
     }
 
@@ -55,9 +52,7 @@ export class AppComponent implements OnInit {
     async checkServerStatus() {
         this.isServerOnline = false;
         try {
-            const {
-                data,
-            }: any = await this.afakestoreService.checkServerStatus();
+            const { data }: any = await this.server.checkServerStatus();
 
             if (data) {
                 this.isServerOnline = true;

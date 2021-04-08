@@ -5,7 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { CreditCardValidators } from 'angular-cc-library';
 import { ToastrService } from 'ngx-toastr';
 import { MONTH_OPTIONS } from '../../const/input';
-import { AFakeStoreService } from '../../services/a-fake-store.service';
+import { ServerService } from '../../services/server.service';
 import { GetTokenSaleForm } from '../../store/actions/sales-detail.actions';
 import { CartState } from '../../store/states/cart.state';
 
@@ -54,7 +54,7 @@ export class TokenSaleFormComponent implements OnInit {
 
     constructor(
         private store: Store,
-        private afakestoreService: AFakeStoreService,
+        private serverService: ServerService,
         private toastr: ToastrService
     ) {
         this.totalAmount$.subscribe((result: any) => {
@@ -120,7 +120,7 @@ export class TokenSaleFormComponent implements OnInit {
                 });
 
             try {
-                const { data } = (await this.afakestoreService.processTokenSale(
+                const { data } = (await this.serverService.processTokenSale(
                     tokenizationBody
                 )) as any;
 

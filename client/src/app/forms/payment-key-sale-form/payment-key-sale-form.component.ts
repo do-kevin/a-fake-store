@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
-import { AFakeStoreService } from '../../services/a-fake-store.service';
+import { ServerService } from '../../services/server.service';
 import { CartState } from '../../store/states/cart.state';
 
 @Component({
@@ -15,7 +15,7 @@ export class PaymentKeySaleFormComponent implements OnInit {
     total: any;
 
     constructor(
-        private afakestoreService: AFakeStoreService,
+        private serverService: ServerService,
         private toastr: ToastrService
     ) {
         this.totalAmount$.subscribe((result: any) => {
@@ -68,9 +68,7 @@ export class PaymentKeySaleFormComponent implements OnInit {
         const transactionAmount = formatCurrency(this.total, 'en', '');
 
         try {
-            const {
-                data,
-            } = (await this.afakestoreService.processPaymentKeySale({
+            const { data } = (await this.serverService.processPaymentKeySale({
                 payment_key: token,
                 amount: transactionAmount,
             })) as any;

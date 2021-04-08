@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyFormsModule } from './forms/forms.module';
 import { PipesModule } from './pipes/pipes.module';
-import { AFakeStoreService } from './services/a-fake-store.service';
+import { ServerService } from './services/server.service';
 import { CartState } from './store/states/cart.state';
 import { FakeStoreState } from './store/states/fake-store.state';
 import { SalesDetailState } from './store/states/sales-detail.state';
@@ -46,7 +46,7 @@ import { SalesDetailState } from './store/states/sales-detail.state';
         AppRoutingModule,
         PipesModule,
     ],
-    providers: [AFakeStoreService],
+    providers: [ServerService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

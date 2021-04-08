@@ -7,7 +7,7 @@ const { production, SERVER_API_URL } = environment;
 @Injectable({
     providedIn: 'root',
 })
-export class AFakeStoreService {
+export class ServerService {
     private baseUrl: string = 'http://localhost:8000';
 
     constructor(private http: HttpClient) {
