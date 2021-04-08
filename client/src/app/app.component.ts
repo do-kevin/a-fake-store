@@ -1,9 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, HostBinding, OnInit } from '@angular/core';
-import {
-    faExclamationTriangle,
-    faServer,
-} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngxs/store';
 import { setTheme } from 'ngx-bootstrap/utils';
 import { GetAllProducts } from 'src/app/core/actions/fake-store.actions';
@@ -33,8 +29,6 @@ declare global {
 export class AppComponent implements OnInit {
     @HostBinding('class') classes = 'd-block w-100 h-100 bg-light';
     isServerOnline: boolean = false;
-    faServer = faServer;
-    faExclamationTriangle = faExclamationTriangle;
     showServerStatus: boolean = true;
 
     constructor(private store: Store, private api: ApiService) {

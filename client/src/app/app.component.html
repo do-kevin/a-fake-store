@@ -10,12 +10,12 @@
     <fa-icon
         *ngIf="!isServerOnline"
         class="text-danger"
-        [icon]="faExclamationTriangle"
+        [icon]="['fas', 'exclamation-triangle']"
     ></fa-icon>
     <fa-icon
         *ngIf="isServerOnline"
         class="text-dark"
-        [icon]="faServer"
+        [icon]="['fas', 'server']"
     ></fa-icon>
 </div>
 <router-outlet></router-outlet>
