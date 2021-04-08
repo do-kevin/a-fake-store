@@ -12,13 +12,13 @@ import { CreditCardDirectivesModule } from 'angular-cc-library';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
+import { ApiService } from 'src/app/core/services';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyFormsModule } from './forms/forms.module';
 import { PipesModule } from './pipes/pipes.module';
-import { ServerService } from './services/server.service';
 import { CartState } from './store/states/cart.state';
 import { FakeStoreState } from './store/states/fake-store.state';
 import { SalesDetailState } from './store/states/sales-detail.state';
@@ -46,7 +46,7 @@ import { SalesDetailState } from './store/states/sales-detail.state';
         AppRoutingModule,
         PipesModule,
     ],
-    providers: [ServerService],
+    providers: [ApiService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
