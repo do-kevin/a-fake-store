@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { reject } from 'lodash-es';
+import { CartStateModel } from 'src/app/core/models/cart.model';
+import { Product } from 'src/app/core/models/product.model';
 import { AddItemToCart, RemoveItemFromCart } from '../actions/cart.actions';
-import { Product } from './fake-store.state';
-
-export interface CartStateModel {
-    products: Product[];
-    total: number;
-}
 
 @State<CartStateModel>({
     name: 'cart',
@@ -18,7 +14,7 @@ export interface CartStateModel {
 })
 @Injectable()
 export class CartState {
-    constructor(private store: Store) {}
+    constructor(private _store: Store) {}
 
     @Selector()
     static showCartItems(state: CartStateModel) {

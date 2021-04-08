@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Select, Store } from '@ngxs/store';
-import { RemoveItemFromCart } from '../store/actions/cart.actions';
-import { CartState } from '../store/states/cart.state';
+import { RemoveItemFromCart } from 'src/app/core/actions/cart.actions';
+import { CartState } from 'src/app/core/states/cart.state';
 
 @Component({
     selector: 'app-shop',
@@ -14,8 +13,6 @@ export class ShopComponent {
     @Select(CartState.showNumOfItemsInCart) numOfItemsInCart$: any;
     isCollapsed: boolean;
     total: any;
-    faTimes = faTimes;
-    faTrashAlt = faTrashAlt;
     numOfCartItems: number = 0;
 
     constructor(private store: Store) {

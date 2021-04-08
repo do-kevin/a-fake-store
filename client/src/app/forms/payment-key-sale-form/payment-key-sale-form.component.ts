@@ -2,9 +2,9 @@ import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
+import { ApiService } from 'src/app/core/services';
+import { CartState } from 'src/app/core/states/cart.state';
 import { environment } from '../../../environments/environment';
-import { ServerService } from '../../services/server.service';
-import { CartState } from '../../store/states/cart.state';
 
 @Component({
     selector: 'app-payment-key-sale-form',
@@ -14,10 +14,7 @@ export class PaymentKeySaleFormComponent implements OnInit {
     @Select(CartState.showTotal) totalAmount$: any;
     total: any;
 
-    constructor(
-        private serverService: ServerService,
-        private toastr: ToastrService
-    ) {
+    constructor(private apiService: ApiService, private toastr: ToastrService) {
         this.totalAmount$.subscribe((result: any) => {
             this.total = result;
             return result;
@@ -68,7 +65,7 @@ export class PaymentKeySaleFormComponent implements OnInit {
         const transactionAmount = formatCurrency(this.total, 'en', '');
 
         try {
-            const { data } = (await this.serverService.processPaymentKeySale({
+            const { data } = (await this.apiService.processPaymentKeySale({
                 payment_key: token,
                 amount: transactionAmount,
             })) as any;

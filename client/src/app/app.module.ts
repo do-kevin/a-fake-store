@@ -4,24 +4,22 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
 import { CreditCardDirectivesModule } from 'angular-cc-library';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
+import { ApiService } from 'src/app/core/services';
+import { CartState } from 'src/app/core/states/cart.state';
+import { FakeStoreState } from 'src/app/core/states/fake-store.state';
+import { SalesDetailState } from 'src/app/core/states/sales-detail.state';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CoreModule } from './core/core.module';
 import { MyFormsModule } from './forms/forms.module';
-import { PipesModule } from './pipes/pipes.module';
-import { ServerService } from './services/server.service';
-import { CartState } from './store/states/cart.state';
-import { FakeStoreState } from './store/states/fake-store.state';
-import { SalesDetailState } from './store/states/sales-detail.state';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
     declarations: [AppComponent, CheckoutComponent],
@@ -37,16 +35,14 @@ import { SalesDetailState } from './store/states/sales-detail.state';
         }),
         NgxsFormPluginModule.forRoot(),
         NgxsReduxDevtoolsPluginModule.forRoot(),
-        CollapseModule.forRoot(),
         ToastrModule.forRoot(),
         CreditCardDirectivesModule,
         MyFormsModule,
-        FontAwesomeModule,
-        TooltipModule.forRoot(),
         AppRoutingModule,
-        PipesModule,
+        SharedModule,
+        CoreModule,
     ],
-    providers: [ServerService],
+    providers: [ApiService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

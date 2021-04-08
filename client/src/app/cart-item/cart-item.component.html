@@ -1,4 +1,3 @@
-<!-- <div class="row mx-0 rounded mb-3" *ngFor="let product of items$ | async"> -->
 <img class="col-2 px-0" [src]="product.image" style="object-fit: contain" />
 <div class="col-10">
     <p class="font-weight-bold my-0" style="line-height: 1.2">
@@ -11,8 +10,7 @@
         class="btn p-0 text-danger"
         (click)="removeFromCart(product)"
     >
-        <fa-icon [icon]="faTrashAlt"></fa-icon>
+        <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon>
         <span class="position-relative" style="bottom: 1.5px"> remove </span>
     </button>
 </div>
-<!-- </div> -->

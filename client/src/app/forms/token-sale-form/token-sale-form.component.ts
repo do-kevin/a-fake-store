@@ -4,10 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { CreditCardValidators } from 'angular-cc-library';
 import { ToastrService } from 'ngx-toastr';
-import { MONTH_OPTIONS } from '../../const/input';
-import { ServerService } from '../../services/server.service';
-import { GetTokenSaleForm } from '../../store/actions/sales-detail.actions';
-import { CartState } from '../../store/states/cart.state';
+import { GetTokenSaleForm } from 'src/app/core/actions/sales-detail.actions';
+import { MONTH_OPTIONS } from 'src/app/core/constants/month-options';
+import { ApiService } from 'src/app/core/services';
+import { CartState } from 'src/app/core/states/cart.state';
 
 @Component({
     selector: 'app-token-sale-form',
@@ -54,7 +54,7 @@ export class TokenSaleFormComponent implements OnInit {
 
     constructor(
         private store: Store,
-        private serverService: ServerService,
+        private apiService: ApiService,
         private toastr: ToastrService
     ) {
         this.totalAmount$.subscribe((result: any) => {
@@ -120,7 +120,7 @@ export class TokenSaleFormComponent implements OnInit {
                 });
 
             try {
-                const { data } = (await this.serverService.processTokenSale(
+                const { data } = (await this.apiService.processTokenSale(
                     tokenizationBody
                 )) as any;
 
