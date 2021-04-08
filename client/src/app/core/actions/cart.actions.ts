@@ -1,4 +1,4 @@
-import { Product } from '../states/fake-store.state';
+import { Product } from 'src/app/core/models/product.model';
 
 export class AddItemToCart {
     static readonly type = '[Checkout Screen] AddItemToCart';

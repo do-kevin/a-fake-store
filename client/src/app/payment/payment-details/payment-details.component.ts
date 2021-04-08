@@ -1,6 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { CartState } from 'src/app/store/states/cart.state';
+import { CartState } from 'src/app/core/states/cart.state';
 
 type FormType = 'tokenSale' | 'paymentKeySale';
 

@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Select } from '@ngxs/store';
-import { CartState } from 'src/app/store/states/cart.state';
+import { CartState } from 'src/app/core/states/cart.state';
 
 @Component({
     selector: 'app-navbar',

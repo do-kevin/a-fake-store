@@ -13,15 +13,15 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import { ApiService } from 'src/app/core/services';
+import { CartState } from 'src/app/core/states/cart.state';
+import { FakeStoreState } from 'src/app/core/states/fake-store.state';
+import { SalesDetailState } from 'src/app/core/states/sales-detail.state';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { MyFormsModule } from './forms/forms.module';
 import { PipesModule } from './pipes/pipes.module';
-import { CartState } from './store/states/cart.state';
-import { FakeStoreState } from './store/states/fake-store.state';
-import { SalesDetailState } from './store/states/sales-detail.state';
 
 @NgModule({
     declarations: [AppComponent, CheckoutComponent],

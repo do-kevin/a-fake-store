@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
-import { CartState } from 'src/app/store/states/cart.state';
-import { FakeStoreState } from 'src/app/store/states/fake-store.state';
+import { CartState } from 'src/app/core/states/cart.state';
+import { FakeStoreState } from 'src/app/core/states/fake-store.state';
 
 @Component({
     selector: 'app-collection',

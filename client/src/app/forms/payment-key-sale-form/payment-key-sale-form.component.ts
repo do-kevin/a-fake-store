@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/core/services';
+import { CartState } from 'src/app/core/states/cart.state';
 import { environment } from '../../../environments/environment';
-import { CartState } from '../../store/states/cart.state';
 
 @Component({
     selector: 'app-payment-key-sale-form',

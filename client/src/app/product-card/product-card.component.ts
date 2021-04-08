@@ -3,7 +3,7 @@ import { Store } from '@ngxs/store';
 import {
     AddItemToCart,
     RemoveItemFromCart,
-} from '../store/actions/cart.actions';
+} from 'src/app/core/actions/cart.actions';
 
 @Component({
     selector: 'app-product-card',

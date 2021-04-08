@@ -6,8 +6,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngxs/store';
 import { setTheme } from 'ngx-bootstrap/utils';
+import { GetAllProducts } from 'src/app/core/actions/fake-store.actions';
 import { ApiService } from './core/services';
-import { GetAllProducts } from './store/actions/fake-store.actions';
 
 declare global {
     interface Window {

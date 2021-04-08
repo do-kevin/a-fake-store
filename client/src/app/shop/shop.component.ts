@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Select, Store } from '@ngxs/store';
-import { RemoveItemFromCart } from '../store/actions/cart.actions';
-import { CartState } from '../store/states/cart.state';
+import { RemoveItemFromCart } from 'src/app/core/actions/cart.actions';
+import { CartState } from 'src/app/core/states/cart.state';
 
 @Component({
     selector: 'app-shop',

@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngxs/store';
-import { RemoveItemFromCart } from '../store/actions/cart.actions';
+import { RemoveItemFromCart } from 'src/app/core/actions/cart.actions';
 
 @Component({
     selector: 'app-cart-item',

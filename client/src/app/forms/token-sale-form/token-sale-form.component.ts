@@ -4,10 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { CreditCardValidators } from 'angular-cc-library';
 import { ToastrService } from 'ngx-toastr';
+import { GetTokenSaleForm } from 'src/app/core/actions/sales-detail.actions';
 import { MONTH_OPTIONS } from 'src/app/core/constants/month-options';
 import { ApiService } from 'src/app/core/services';
-import { GetTokenSaleForm } from '../../store/actions/sales-detail.actions';
-import { CartState } from '../../store/states/cart.state';
+import { CartState } from 'src/app/core/states/cart.state';
 
 @Component({
     selector: 'app-token-sale-form',
