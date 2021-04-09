@@ -4,7 +4,7 @@ import { Select } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/core/services';
 import { CartState } from 'src/app/core/states/cart.state';
-import { environment } from '../../../environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-payment-key-sale-form',

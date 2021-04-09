@@ -16,13 +16,11 @@ import { SalesDetailState } from 'src/app/core/states/sales-detail.state';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CheckoutComponent } from './checkout/checkout.component';
 import { CoreModule } from './core/core.module';
-import { MyFormsModule } from './forms/forms.module';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-    declarations: [AppComponent, CheckoutComponent],
+    declarations: [AppComponent],
     imports: [
         CommonModule,
         BrowserModule,
@@ -37,7 +35,6 @@ import { SharedModule } from './shared/shared.module';
         NgxsReduxDevtoolsPluginModule.forRoot(),
         ToastrModule.forRoot(),
         CreditCardDirectivesModule,
-        MyFormsModule,
         AppRoutingModule,
         SharedModule,
         CoreModule,
