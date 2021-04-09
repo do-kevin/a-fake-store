@@ -1,52 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { NgxsModule } from '@ngxs/store';
-import { CreditCardDirectivesModule } from 'angular-cc-library';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { ToastrModule } from 'ngx-toastr';
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { MyFormsModule } from './forms/forms.module';
-import { PipesModule } from './pipes/pipes.module';
-import { AFakeStoreService } from './services/a-fake-store.service';
-import { CartState } from './store/states/cart.state';
-import { FakeStoreState } from './store/states/fake-store.state';
-import { SalesDetailState } from './store/states/sales-detail.state';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppComponent } from 'src/app/app.component';
+import { CoreModule } from 'src/app/core/core.module';
+import { ApiService } from 'src/app/core/services';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-    declarations: [AppComponent, CheckoutComponent],
-    imports: [
-        CommonModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgxsModule.forRoot([SalesDetailState, FakeStoreState, CartState], {
-            developmentMode: !environment.production,
-        }),
-        NgxsFormPluginModule.forRoot(),
-        NgxsReduxDevtoolsPluginModule.forRoot(),
-        CollapseModule.forRoot(),
-        ToastrModule.forRoot(),
-        CreditCardDirectivesModule,
-        MyFormsModule,
-        FontAwesomeModule,
-        TooltipModule.forRoot(),
-        AppRoutingModule,
-        PipesModule,
-    ],
-    providers: [AFakeStoreService],
+    declarations: [AppComponent],
+    imports: [CommonModule, AppRoutingModule, SharedModule, CoreModule],
+    providers: [ApiService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

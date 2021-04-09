@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PaymentComponent } from './payment/payment.component';
-import { PaymentModule } from './payment/payment.module';
-import { ShopComponent } from './shop/shop.component';
-import { ShopModule } from './shop/shop.module';
+import { PaymentComponent } from 'src/app/features/payment/payment.component';
+import { PaymentModule } from 'src/app/features/payment/payment.module';
+import { ShopComponent } from 'src/app/features/shop/shop.component';
+import { ShopModule } from 'src/app/features/shop/shop.module';
 
 const routes: Routes = [
     {

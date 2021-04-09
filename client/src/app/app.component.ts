@@ -1,13 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, HostBinding, OnInit } from '@angular/core';
-import {
-    faExclamationTriangle,
-    faServer,
-} from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngxs/store';
 import { setTheme } from 'ngx-bootstrap/utils';
-import { AFakeStoreService } from './services/a-fake-store.service';
-import { GetAllProducts } from './store/actions/fake-store.actions';
+import { GetAllProducts } from 'src/app/core/actions/fake-store.actions';
+import { ApiService } from './core/services';
 
 declare global {
     interface Window {
@@ -33,14 +29,9 @@ declare global {
 export class AppComponent implements OnInit {
     @HostBinding('class') classes = 'd-block w-100 h-100 bg-light';
     isServerOnline: boolean = false;
-    faServer = faServer;
-    faExclamationTriangle = faExclamationTriangle;
     showServerStatus: boolean = true;
 
-    constructor(
-        private store: Store,
-        private afakestoreService: AFakeStoreService
-    ) {
+    constructor(private store: Store, private api: ApiService) {
         setTheme('bs4');
     }
 
@@ -55,9 +46,7 @@ export class AppComponent implements OnInit {
     async checkServerStatus() {
         this.isServerOnline = false;
         try {
-            const {
-                data,
-            }: any = await this.afakestoreService.checkServerStatus();
+            const { data }: any = await this.api.checkServerStatus();
 
             if (data) {
                 this.isServerOnline = true;
