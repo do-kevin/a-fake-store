@@ -11,8 +11,8 @@ import {
     faTimes,
     faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { CartItemComponent } from '../cart-item/cart-item.component';
-import { PipesModule } from '../pipes/pipes.module';
+import { PipesModule } from 'src/app/core/pipes/pipes.module';
+import { CartItemComponent } from 'src/app/shared/components/cart-item/cart-item.component';
 import { BootstrapModule } from './bootstrap.module';
 
 @NgModule({

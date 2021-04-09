@@ -4,11 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { PipesModule } from '../pipes/pipes.module';
-import { ProductCardComponent } from '../product-card/product-card.component';
-import { SharedModule } from '../shared/shared.module';
-import { CollectionComponent } from './collection/collection.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { PipesModule } from 'src/app/core/pipes/pipes.module';
+import { CollectionComponent } from 'src/app/features/shop/components/collection/collection.component';
+import { NavbarComponent } from 'src/app/features/shop/components/navbar/navbar.component';
+import { ProductCardComponent } from 'src/app/features/shop/components/product-card/product-card.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ShopComponent } from './shop.component';
 
 @NgModule({
@@ -25,7 +25,7 @@ import { ShopComponent } from './shop.component';
         BrowserAnimationsModule,
         CollapseModule.forRoot(),
         PipesModule,
-        SharedModule
+        SharedModule,
     ],
     exports: [NavbarComponent, ShopComponent],
 })
